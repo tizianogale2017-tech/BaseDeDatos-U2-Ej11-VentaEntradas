@@ -29,3 +29,27 @@ Modelar el sistema de una productora de espectáculos: recintos divididos en sec
 ## Resultado
 
 ![Diagrama](captura.png)
+
+---
+
+## Normalización
+
+Se normaliza el documento `Compra` con sus registros de `Ticket`. En todas las tablas la PK va en la primera columna y las FK al final. Los datos son de ejemplo.
+
+**Forma 0.** Una sola tabla con todo junto. Hay celdas con listas: cada compra puede tener varios registros de ticket.
+
+![Forma 0](normalizacion/00-forma-0.png)
+
+**1FN.** Cada elemento de la lista pasa a su propia fila y la clave queda compuesta: (`id_compra`, `id_ticket`).
+
+![1FN](normalizacion/01-1fn.png)
+
+**2FN.** Los datos de compra dependen solo de `id_compra`, así que van a `Compra`. `Ticket` queda aparte con su propio id y la FK a `Compra`.
+
+![2FN](normalizacion/02-2fn.png)
+
+**3FN.** Los datos de `Cliente`, `Concierto_Sector`, `Concierto`, `Sector` y `Recinto` dependen de su propio identificador y no de la PK de compra, así que pasan a tablas aparte. En el modelo final cada tabla usa su id propio.
+
+![3FN](normalizacion/03-3fn.png)
+
+Para que se vea la lista en la Forma 0, se agregó un registro de ejemplo en `Ticket` para el compra 1.
